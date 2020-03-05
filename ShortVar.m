@@ -1,34 +1,34 @@
-% ¶ÌÊ±ÄÜÁ¿
+% 
 %
 %
 %
 function [En,TimeFrame]=ShortVar(x,Fs,FrameLength,FrameStep,win)
-%filedir=['F:\ÎÄµµ\Â¼Òô\'];                % ÉèÖÃÂ·¾¶
-%filename='a.m4a';   % ÉèÖÃÎÄ¼şÃû
-%fle=[filedir filename];    % ¹¹³ÉÍêÕûµÄÂ·¾¶ºÍÎÄ¼şÃû
-%[x,Fs]=audioread(fle);       % ¶ÁÈëÊı¾İÎÄ¼ş
+%filedir=['F:\æ–‡æ¡£\å½•éŸ³\'];                % è®¾ç½®è·¯å¾„
+%filename='a.m4a';   % è®¾ç½®æ–‡ä»¶å
+%fle=[filedir filename];    % æ„æˆå®Œæ•´çš„è·¯å¾„å’Œæ–‡ä»¶å
+%[x,Fs]=audioread(fle);       % è¯»å…¥æ•°æ®æ–‡ä»¶
 %x=x(:,1);
-%Fs = Fs; %²ÉÑùÆµÂÊ
-%FrameLength=0.01;            %Ö¡³¤¶È£¬µ¥Î»s£»
-%FrameStep=0.01;            %Ö¡ÒÆ£¬s
+%Fs = Fs; %é‡‡æ ·é¢‘ç‡
+%FrameLength=0.01;            %å¸§é•¿åº¦ï¼Œå•ä½sï¼›
+%FrameStep=0.01;            %å¸§ç§»ï¼Œs
 XFrame=framing(x,Fs,FrameLength,FrameStep,win);
 
- fn=size(XFrame,2);              % Çó³öÖ¡Êı
-% time=(0:N-1)/Fs;           % ¼ÆËã³öĞÅºÅµÄÊ±¼ä¿Ì¶È
+ fn=size(XFrame,2);              % æ±‚å‡ºå¸§æ•°
+% time=(0:N-1)/Fs;           % è®¡ç®—å‡ºä¿¡å·çš„æ—¶é—´åˆ»åº¦
 En=zeros(1,length(fn))
 for i=1 : fn
-     u=XFrame(:,i);              % È¡³öÒ»Ö¡
-     u2=var(u,1);               % Çó³ö·½²î£¨/N£©
-     En(i)=sum(u2);         % ¶ÔÒ»Ö¡ÀÛ¼ÓÇóºÍ
+     u=XFrame(:,i);              % å–å‡ºä¸€å¸§
+     u2=var(u,1);               % æ±‚å‡ºæ–¹å·®ï¼ˆ/Nï¼‰
+     En(i)=sum(u2);         % å¯¹ä¸€å¸§ç´¯åŠ æ±‚å’Œ
 end
  
 TimeSignal=(0:length(x)-1)./Fs;
 TimeFrame=(0:fn-1).*FrameStep;
-subplot 211; plot(TimeSignal,x); % »­³öÊ±¼ä²¨ĞÎ 
- title('Ô­Ê¼²¨ĞÎ');
- ylabel('·ùÖµ'); xlabel(['Ê±¼ä/s' 10 '(a)']);
-% frameTime=frame2time(fn,wlen,inc,Fs);   % Çó³öÃ¿Ö¡¶ÔÓ¦µÄÊ±¼ä
-subplot 212; plot(TimeFrame,En)     % »­³ö¶ÌÊ±·½²îÍ¼
- title('¶ÌÊ±·½²î');
- ylabel('·ùÖµ'); xlabel(['Ê±¼ä/s' 10 '(b)']);
+subplot 211; plot(TimeSignal,x); % ç”»å‡ºæ—¶é—´æ³¢å½¢ 
+ title('åŸå§‹æ³¢å½¢');
+ ylabel('å¹…å€¼'); xlabel(['æ—¶é—´/s' 10 '(a)']);
+% frameTime=frame2time(fn,wlen,inc,Fs);   % æ±‚å‡ºæ¯å¸§å¯¹åº”çš„æ—¶é—´
+subplot 212; plot(TimeFrame,En)     % ç”»å‡ºçŸ­æ—¶æ–¹å·®å›¾
+ title('çŸ­æ—¶æ–¹å·®');
+ ylabel('å¹…å€¼'); xlabel(['æ—¶é—´/s' 10 '(b)']);
 end
